@@ -23,9 +23,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // /cats/facts GET route
-app.get('/cats/fact', function(req, res) {
-  fetch('https://catfact.ninja/fact');
-  
+app.get('/cats/fact', async function(req, res) {
+  const catFact = await (await fetch('https://catfact.ninja/fact')).json();
+  res.render('cat/fact', {fact: catFact.fact});
 })
 
 // catch 404 and forward to error handler
